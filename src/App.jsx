@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-import background from './media/0_Blue_Sky_Clouds.mp4'
+// import background from './public/0_Blue_Sky_Clouds.mp4'
 
 
 
@@ -20,7 +20,9 @@ function App() {
     return (
      
     <div className='app'>
-       <video src={background} autoPlay muted loop className='background'></video>
+       <video src="./0_Blue_Sky_Clouds.mp4" autoPlay muted loop className='background'>
+
+       </video>
       <div className='weather'>
         <h1>Weather App</h1>
         <form className='weather_form'>
