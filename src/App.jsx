@@ -1,25 +1,28 @@
-import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { useState } from 'react';
+import background from './media/0_Blue_Sky_Clouds.mp4'
+
 
 
 const API_KEY = '9626038af778b2ed3da46501bf00ae4a';
 
 function App() {
   const [city, setCity] = useState('');
-  const [weather, setWeather] = useState();
+  const [weather, setWeather] = useState({});
 
   const onClickSearchWeather = async (event) => {
     event.preventDefault();
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`,)
     const data = await response.json();
-    console.log(data);
-  }
-  return (
+    setWeather(data);
+  };
+
+    return (
+     
     <div className='app'>
+       <video src={background} autoPlay muted loop className='background'></video>
       <div className='weather'>
-        <h1>Weather</h1>
+        <h1>Weather App</h1>
         <form className='weather_form'>
           <input className='weather_input' type='text' placeholder='Your city' onChange={(event) => setCity(event.target.value)}></input>
           <button className='weather_button' type="submit" onClick={onClickSearchWeather}>
@@ -29,11 +32,14 @@ function App() {
             </svg>
           </button>
         </form>
+        {weather.name !== undefined ? (
+        <>
         <h2 className='weather_city'>{weather.name}</h2>
-        <p className='weather_temp'>32</p>
-        <p className='weather_info'>Sunny</p>
-
-      </div>
+        <p className='weather_temp'>{Math.round(weather.main.temp-273)}°C</p>
+        <p className='weather_info'>{weather.weather[0].main}</p>
+        </>
+      ) : null}
+    </div>  
     </div>
   )
 }
