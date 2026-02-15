@@ -1,12 +1,9 @@
 import './App.css';
 import { useState } from 'react';
-// import background from './public/0_Blue_Sky_Clouds.mp4'
-
-
-
-const API_KEY = '9626038af778b2ed3da46501bf00ae4a';
 
 function App() {
+  const API_KEY = import.meta.env.VITE_API_KEY;
+console.log(API_KEY)
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState({});
 
@@ -17,12 +14,12 @@ function App() {
     setWeather(data);
   };
 
-    return (
-     
-    <div className='app'>
-       <video src="./0_Blue_Sky_Clouds.mp4" autoPlay muted loop className='background'>
+  return (
 
-       </video>
+    <div className='app'>
+      <video src="./0_Blue_Sky_Clouds.mp4" autoPlay muted loop className='background'>
+
+      </video>
       <div className='weather'>
         <h1>Weather App</h1>
         <form className='weather_form'>
@@ -35,13 +32,13 @@ function App() {
           </button>
         </form>
         {weather.name !== undefined ? (
-        <>
-        <h2 className='weather_city'>{weather.name}</h2>
-        <p className='weather_temp'>{Math.round(weather.main.temp-273)}°C</p>
-        <p className='weather_info'>{weather.weather[0].main}</p>
-        </>
-      ) : null}
-    </div>  
+          <>
+            <h2 className='weather_city'>{weather.name}</h2>
+            <p className='weather_temp'>{Math.round(weather.main.temp - 273)}°C</p>
+            <p className='weather_info'>{weather.weather[0].main}</p>
+          </>
+        ) : null}
+      </div>
     </div>
   )
 }
